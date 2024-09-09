@@ -1,0 +1,57 @@
+using System;
+using System.Collections.Generic;
+
+class Solution
+{
+    static List<int> FindMatchingElements(int[,,,] array1, int[,,,] array2)
+    {
+        HashSet<int> elementsSet = new HashSet<int>();
+        List<int> result = new List<int>();
+
+        foreach (var element in array1)
+        {
+            elementsSet.Add(element);
+        }
+
+        foreach (var element in array2)
+        {
+            if (elementsSet.Contains(element))
+            {
+                result.Add(element);
+                elementsSet.Remove(element);
+            }
+        }
+
+        //result.Sort();
+        return result;
+    }
+
+    static void Main()
+    {
+        int[,,,] array1 = new int[2, 2, 2, 2] {
+                {
+                    {{1, 2}, {3, 4}},
+                    {{5, 6}, {7, 8}}
+                },
+                {
+                    {{9, 10}, {11, 12}},
+                    {{13, 14}, {15, 16}}
+                }
+        };
+
+        int[,,,] array2 = new int[2, 2, 2, 2] {
+                {
+                    {{5, 2}, {13, 14}},
+                    {{9, 6}, {20, 8}}
+                },
+                {
+                    {{3, 10}, {21, 4}},
+                    {{25, 16}, {7, 1}}
+                }
+         };
+
+        List<int> matchingElements = FindMatchingElements(array1, array2);
+
+        Console.WriteLine("Matching elements: " + string.Join(", ", matchingElements));
+    }
+}
